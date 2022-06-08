@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "Welcome to the automated installer"
+echo "who are you?"
+read varname
 echo "checking permissions..."
 
 if (($EUID != 0 )); then
@@ -35,7 +37,7 @@ echo "
     Installing HTB Theme ... 
   "
   
-mkdir ~/gitclones && cd ~/gitclones
+mkdir /home/$varname/gitclones && cd /home/$varname/gitclones
 echo "installing sources" 
 
 xterm -e git clone https://github.com/theGuildHall/pwnbox.git
@@ -49,21 +51,21 @@ echo "
 
     Installing HTB Theme ... 
   "
-cd ~/gitclones/pwnbox
+cd /home/$varname/gitclones/pwnbox
 sudo cp *.sh /opt && sudo cp -R bloodhound/ /opt && sudo cp -R htb/ /opt && sudo cp -R icons/ /opt && sudo cp banner /opt
-sudo cp ~/gitclones/pwnbox/htb.jpg /usr/share/backgrounds/
-sudo cp -R ~/gitclones/pwnbox/Material-Black-Lime-Numix-FLAT/ /usr/share/icons/
-sudo cp -R ~/gitclones/pwnbox/htb /usr/share/icons/
-sudo mkdir /usr/share/themes/HackTheBox && sudo cp ~/gitclones/pwnbox/index.theme /usr/share/themes/HackTheBox
+sudo cp /home/$varname/gitclones/pwnbox/htb.jpg /usr/share/backgrounds/
+sudo cp -R /home/$varname/gitclones/pwnbox/Material-Black-Lime-Numix-FLAT/ /usr/share/icons/
+sudo cp -R /home/$varname/gitclones/pwnbox/htb /usr/share/icons/
+sudo mkdir /usr/share/themes/HackTheBox && sudo cp /home/$varname/gitclones/pwnbox/index.theme /usr/share/themes/HackTheBox
 echo "Installing custom bashrc ..."
 
 
-rm ~/.bashrc
-mv ~/Downloads/bashrc ~/.bashrc
+rm /home/$varname/.bashrc
+mv /home/$varname/Downloads/bashrc /home/$varname/.bashrc
 sudo rm /root/.bashrc
-sudo cp ~/.bashrc /root/
+sudo cp /home/$varname/.bashrc /root/
 
-figlet DONE | lolcat
+figlet DONE 
 
 
 
