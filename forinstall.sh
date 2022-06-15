@@ -54,7 +54,7 @@ echo "
   "
 echo ""
 
-wget https://github.com/wrkeagle/Forinstall/blob/main/bashrc
+wget https://raw.githubusercontent.com/wrkeagle/Forinstall/main/bashrc
 
 rm /home/$varname/.bashrc
 sudo cp bashrc /home/$varname/.bashrc
