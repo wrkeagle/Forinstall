@@ -2,7 +2,7 @@
 
 echo "Welcome to the automated installer"
 echo "who are you?"
-echo "username:" read varname
+read varname
 echo "checking permissions..."
 
 if (($EUID != 0 )); then
