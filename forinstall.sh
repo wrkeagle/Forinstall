@@ -2,7 +2,7 @@
 
 echo "Welcome to the automated installer"
 echo "who are you?"
-read varname
+echo "username:" read varname
 echo "checking permissions..."
 
 if (($EUID != 0 )); then
@@ -14,17 +14,21 @@ fi
 sleep 3s
 echo "Starting the installation"
 echo "."
-sleep 0.2
+sleep 0.4
 echo "."
-sleep 0.2
+sleep 0.5
 echo "."
 clear
+echo "Starting the installation..."
+clear
 
-sudo apt update
-sudo apt upgrade
-curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+echo "UPDATING SYSTEM SOURCES"
+xterm -e 'sudo apt update'
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install -y ngrok
 sudo apt install -y figlet lolcat feroxbuster cherrytree 
-
+wget https://github.com/flameshot-org/flameshot/releases/download/v11.0.0/flameshot-11.0.0-1.debian-10.amd64.deb && sudo gdebi -n flameshot-11.0.0-1.debian-10.amd64.deb
+echo "cleaning..."
+rm flameshot-11.0.0-1.debian-10.amd64.deb
 clear
 
 echo "
@@ -36,34 +40,28 @@ echo "
 
     Installing HTB Theme ... 
   "
+
+echo "Installing sources" 
+clear
+echo "
+  █  █         ▐▌     ▄█▄ █          ▄▄▄▄
+  █▄▄█ ▀▀█ █▀▀ ▐▌▄▀    █  █▀█ █▀█    █▌▄█ ▄▀▀▄ ▀▄▀
+  █  █ █▄█ █▄▄ ▐█▀▄    █  █ █ █▄▄    █▌▄█ ▀▄▄▀ █▀█
+
+  P  E  N   -   T  E  S  T  I  N  G     L  A  B  S
   
-mkdir /home/$varname/gitclones && cd /home/$varname/gitclones
-echo "installing sources" 
-
-xterm -e git clone https://github.com/theGuildHall/pwnbox.git
-clear
-echo "
-  █  █         ▐▌     ▄█▄ █          ▄▄▄▄
-  █▄▄█ ▀▀█ █▀▀ ▐▌▄▀    █  █▀█ █▀█    █▌▄█ ▄▀▀▄ ▀▄▀
-  █  █ █▄█ █▄▄ ▐█▀▄    █  █ █ █▄▄    █▌▄█ ▀▄▄▀ █▀█
-
-  P  E  N   -   T  E  S  T  I  N  G     L  A  B  S
-
-    Installing HTB Theme ... 
+  Installing custom bashrc ...
   "
-cd /home/$varname/gitclones/pwnbox
-sudo cp *.sh /opt && sudo cp -R bloodhound/ /opt && sudo cp -R htb/ /opt && sudo cp -R icons/ /opt && sudo cp banner /opt
-sudo cp /home/$varname/gitclones/pwnbox/htb.jpg /usr/share/backgrounds/
-sudo cp -R /home/$varname/gitclones/pwnbox/Material-Black-Lime-Numix-FLAT/ /usr/share/icons/
-sudo cp -R /home/$varname/gitclones/pwnbox/htb /usr/share/icons/
-sudo mkdir /usr/share/themes/HackTheBox && sudo cp /home/$varname/gitclones/pwnbox/index.theme /usr/share/themes/HackTheBox
-echo "Installing custom bashrc ..."
+echo ""
 
+wget https://github.com/wrkeagle/Forinstall/blob/main/bashrc
 
 rm /home/$varname/.bashrc
-mv /home/$varname/Downloads/bashrc /home/$varname/.bashrc
+sudo cp bashrc /home/$varname/.bashrc
 sudo rm /root/.bashrc
-sudo cp /home/$varname/.bashrc /root/
+sudo rm /root/.zshrc
+sudo cp bashrc /root/.zshrc
+sudo mv bashrc /root/.bashrc
 
 figlet DONE 
 
