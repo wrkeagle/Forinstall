@@ -25,7 +25,7 @@ clear
 echo "UPDATING SYSTEM SOURCES"
 xterm -e 'sudo apt update'
 curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install -y ngrok
-sudo apt install -y figlet lolcat feroxbuster cherrytree 
+sudo apt install -y figlet lolcat feroxbuster cherrytree seclists curl enum4linux feroxbuster gobuster impacket-scripts nbtscan nikto nmap onesixtyone oscanner redis-tools smbclient smbmap snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf 
 wget https://github.com/flameshot-org/flameshot/releases/download/v11.0.0/flameshot-11.0.0-1.debian-10.amd64.deb && sudo gdebi -n flameshot-11.0.0-1.debian-10.amd64.deb
 echo "cleaning..."
 rm flameshot-11.0.0-1.debian-10.amd64.deb
